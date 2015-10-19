@@ -29,6 +29,7 @@ import com.amazonaws.services.logs.model.OutputLogEvent;
  * - 3. Iterate over log streams getting Log Events
  * - 4. Build LogEntry string
  * - 5. Execute HTTP GET to Loggly REST API
+ * - 6. (Optional) If the GET to Loggly is successful (200) delete LogStream
  * */
 
 public class LogEventConsumer {
