@@ -18,7 +18,12 @@ import com.amazonaws.services.logs.model.DescribeLogStreamsResult;
 import com.amazonaws.services.logs.model.GetLogEventsRequest;
 import com.amazonaws.services.logs.model.GetLogEventsResult;
 import com.amazonaws.services.logs.model.OutputLogEvent;
-import com.nowellpoint.aws.model.Configuration;
+
+/**
+ * AWS Lambda Function to retrieve log events from AWS CloudWatch and send to Loggly using the REST endpoint
+ * - LOGGLY_API_KEY included in source for demo purposeses but shoud be handled in a secure way
+ * - Lambda function is setup to execute every 5 minutes 
+ * */
 
 public class LogEventConsumer {
 	
