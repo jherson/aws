@@ -20,20 +20,12 @@ import com.amazonaws.services.logs.model.GetLogEventsResult;
 import com.amazonaws.services.logs.model.OutputLogEvent;
 import com.nowellpoint.aws.model.Configuration;
 
-public class LogEventConsumer extends AbstractMicroservice {
+public class LogEventConsumer {
 	
 	private static AWSLogs logsClient = new AWSLogsClient();
+	private static final String LOGGLY_API_KEY = "xxxxxxxxxxxxxx";
 
-	@Override
 	public void invokeService(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
-		
-		/**
-		 * 
-		 * Load configuration file
-		 * 
-		 */
-		
-		Configuration configuration = getConfiguration();
 		
 		/**
 		 * 
@@ -93,7 +85,7 @@ public class LogEventConsumer extends AbstractMicroservice {
 				 */
 				
 				try {
-					HttpURLConnection connection = (HttpURLConnection) new URL("http://logs-01.loggly.com/inputs/".concat(configuration.getLogglyApiKey()).concat("/tag/http/")).openConnection();
+					HttpURLConnection connection = (HttpURLConnection) new URL("http://logs-01.loggly.com/inputs/".concat(LOGGLY_API_KEY.concat("/tag/http/")).openConnection();
 					connection.setRequestMethod("GET");
 					connection.setRequestProperty("content-type", "text/plain");
 					connection.setDoOutput(true);
