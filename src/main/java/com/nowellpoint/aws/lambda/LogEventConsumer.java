@@ -97,7 +97,12 @@ public class LogEventConsumer {
 				 */
 				
 				try {
-					HttpURLConnection connection = (HttpURLConnection) new URL("http://logs-01.loggly.com/inputs/".concat(LOGGLY_API_KEY.concat("/tag/http/")).openConnection();
+					HttpURLConnection connection = (HttpURLConnection) new URL("http://logs-01.loggly.com/inputs/"
+							.concat(configuration.getLogglyApiKey())
+							.concat("/tag/")
+							.concat(describeLogStreamsRequest.getLogGroupName())
+							.concat("/")).openConnection();
+							
 					connection.setRequestMethod("GET");
 					connection.setRequestProperty("content-type", "text/plain");
 					connection.setDoOutput(true);
