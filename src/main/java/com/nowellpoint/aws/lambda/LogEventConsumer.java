@@ -71,16 +71,15 @@ public class LogEventConsumer {
 					}
 					
 					events.forEach(event -> {
-						logEntry.append(describeLogStreamsRequest.getLogGroupName())
-								.append(" ")
-								.append(stream.getLogStreamName())
-								.append(" - ")
-								.append(new Date(event.getTimestamp()))
-								.append(": ")
-								.append(event.getMessage())
-								.append(": ")
-								.append(new Date(event.getIngestionTime()))
-								.append(System.getProperty("line.separator"));
+						try {
+							logEntry.append(new JSONObject().put("timestamp", new Date(event.getTimestamp()))
+									.put("logGroupName", describeLogStreamsRequest.getLogGroupName())
+									.put("logStreamName", stream.getLogStreamName())
+									.put("message", event.getMessage())
+									.put("ingestionTime", new Date(event.getIngestionTime()).toString()));
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					});
 					
 					getLogEventsRequest = new GetLogEventsRequest().withNextToken(getLogEventsResult.getNextForwardToken())
